@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Все посты</a>
+                </div>
+            </div>
+            {% if login %}
+                <div class="navbar-right">
+                    <form action="{{ url_for('signup') }}" class="navbar-form" method="POST">
+                        Вы вошли как <b>{{ login }}</b>
+                        <input type="hidden" name="login" value="">
+                        <button type="submit" class="btn-btn-default">Выйти</button>
+                    </form>
+                </div>
+            {% else %}
+                <form action="{{ url_for('signup') }}" class="navbar-form navbar-right" method="POST">
+                    <input type="text" class="form-control" placeholder="Логин" name="login">
+                    <button type="submit" class="btn-btn-default">Войти</button>
+                </form>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
